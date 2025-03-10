@@ -1,44 +1,31 @@
-//your JS code here. If request
-const codes = document.querySelectorAll('.code');
+// Get all input fields
+const inputs = document.querySelectorAll('.code');
 
-// Focus first input on load
-document.getElementById('code-1').focus();
-
-// Add event listeners to all input fields
-codes.forEach((code, idx) => {
-    // Handle input
-    code.addEventListener('input', (e) => {
-        const value = e.target.value;
-        
-        // Only allow numbers
-        if (!value.match(/[0-9]/)) {
-            code.value = '';
-            return;
+// Add event listener to each input field
+inputs.forEach((input, index) => {
+    input.addEventListener('keyup', (e) => {
+        // Move to next input field if user presses a key
+        if (e.target.value.length === 1 && index < inputs.length - 1) {
+            inputs[index + 1].focus();
         }
 
-        // Move to next input if available
-        if (value && idx < codes.length - 1) {
-            const nextInput = document.getElementById(code-${idx + 2});
-            nextInput.focus();
-        }
-    });
-
-    // Handle keydown
-    code.addEventListener('keydown', (e) => {
-        // Handle backspace
-        if (e.key === 'Backspace') {
-            // If current field is empty and we're not on the first field,
-            // move to previous field
-            if (!code.value && idx > 0) {
-                e.preventDefault();
-                const prevInput = document.getElementById(code-${idx});
-                prevInput.value = '';
-                prevInput.focus();
-            }
-            // If current field has a value, just clear it
-            else if (code.value) {
-                code.value = '';
-            }
+        // Check if all input fields have a value
+        if (Array.from(inputs).every((input) => input.value.length === 1)) {
+            // Verify the OTP (replace with your own verification logic)
+            verifyOTP();
         }
     });
 });
+
+// Verify the OTP
+function verifyOTP() {
+    const otp = Array.from(inputs).map((input) => input.value).join('');
+    console.log(`OTP: ${otp}`);
+
+    // Replace with your own verification logic
+    if (otp === '123456') {
+        console.log('OTP is correct!');
+    } else {
+        console.log('OTP is incorrect!');
+    }
+}
