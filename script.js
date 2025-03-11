@@ -8,24 +8,16 @@ inputs.forEach((input, index) => {
         if (e.target.value.length === 1 && index < inputs.length - 1) {
             inputs[index + 1].focus();
         }
+    });
 
-        // Check if all input fields have a value
-        if (Array.from(inputs).every((input) => input.value.length === 1)) {
-            // Verify the OTP (replace with your own verification logic)
-            verifyOTP();
+    input.addEventListener('keydown', (e) => {
+        // Handle backspace key press
+        if (e.key === 'Backspace') {
+            e.preventDefault();
+            if (index > 0) {
+                inputs[index - 1].focus();
+                inputs[index - 1].value = '';
+            }
         }
     });
 });
-
-// Verify the OTP
-function verifyOTP() {
-    const otp = Array.from(inputs).map((input) => input.value).join('');
-    console.log(`OTP: ${otp}`);
-
-    // Replace with your own verification logic
-    if (otp === '123456') {
-        console.log('OTP is correct!');
-    } else {
-        console.log('OTP is incorrect!');
-    }
-}

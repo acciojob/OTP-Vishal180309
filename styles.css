@@ -61,7 +61,8 @@ body {
     transform: scale(1.05);
 }
 
-.code::-webkit-outer-spin-button, .code::-webkit-inner-spin-button {
+.code::-webkit-outer-spin-button,
+.code::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
